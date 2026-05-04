@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subject Profile: Nayana Baiju | The Daily Forensic</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:wght@300;400;600&family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #f5f0e8; font-family: 'Source Serif 4', Georgia, serif; color: #1a1a1a; }
+
+#progress-bar {
+  position: fixed; top: 0; left: 0; height: 3px;
+  background: #c8a84b; z-index: 2000;
+  width: 0%; transition: width 0.1s linear;
+}
+
+.masthead {
+  position: sticky; top: 0; z-index: 1000;
+  background: #0d0d0d; color: #f5f0e8;
+  text-align: center; padding: 1.2rem 2rem 1rem;
+  border-bottom: 5px double #c8a84b;
+  transition: padding 0.3s;
+}
+.masthead.compact { padding: 0.5rem 2rem; }
+.masthead-top {
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: 'Oswald', sans-serif; font-size: 0.62rem;
+  letter-spacing: 0.22em; color: #777; margin-bottom: 0.6rem;
+  text-transform: uppercase;
+  transition: opacity 0.3s, max-height 0.3s;
+  max-height: 40px; overflow: hidden;
+}
+.masthead.compact .masthead-top { opacity: 0; max-height: 0; margin: 0; }
+.paper-name {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.2rem, 7vw, 4.8rem);
+  font-weight: 900; letter-spacing: -0.01em; line-height: 1; color: #f5f0e8;
+  transition: font-size 0.3s;
+}
+.masthead.compact .paper-name { font-size: clamp(1.3rem, 3vw, 2rem); }
+.paper-tagline {
+  font-family: 'Oswald', sans-serif; font-size: 0.68rem;
+  letter-spacing: 0.38em; color: #c8a84b; text-transform: uppercase; margin-top: 0.4rem;
+  transition: opacity 0.3s, max-height 0.3s;
+  max-height: 30px; overflow: hidden;
+}
+.masthead.compact .paper-tagline { opacity: 0; max-height: 0; margin: 0; }
+
+.ticker-wrap { background: #c8a84b; overflow: hidden; white-space: nowrap; padding: 0.38rem 0; }
+.ticker-inner { display: inline-block; animation: ticker 40s linear infinite; font-family: 'Oswald', sans-serif; font-size: 0.72rem; letter-spacing: 0.35em; text-transform: uppercase; font-weight: 700; color: #0d0d0d; }
+@keyframes ticker { 0% { transform: translateX(100vw); } 100% { transform: translateX(-100%); } }
+
+.home-link-bar {
+  background: #0d0d0d; padding: 0.5rem 2rem;
+  display: flex; align-items: center; gap: 0.8rem;
+  font-family: 'Oswald', sans-serif; font-size: 0.62rem;
+  letter-spacing: 0.2em; text-transform: uppercase;
+}
+.home-link-bar a { color: #c8a84b; text-decoration: none; display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s; }
+.home-link-bar a:hover { color: #f5f0e8; }
+.home-link-bar .sep { color: #333; }
+
+.container { max-width: 940px; margin: 0 auto; padding: 2.8rem 2rem; }
+
+.article-category { font-family: 'Oswald', sans-serif; font-size: 0.68rem; letter-spacing: 0.32em; text-transform: uppercase; color: #c8a84b; margin-bottom: 0.8rem; padding-bottom: 0.4rem; border-bottom: 1px solid #c8a84b; display: inline-block; }
+.headline { font-family: 'Playfair Display', serif; font-size: clamp(1.9rem, 5vw, 3.6rem); font-weight: 900; line-height: 1.08; margin-bottom: 1rem; color: #0d0d0d; }
+.subheadline { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-style: italic; color: #444; line-height: 1.65; margin-bottom: 1.5rem; padding-bottom: 1.4rem; border-bottom: 2px solid #0d0d0d; }
+.byline { font-family: 'Oswald', sans-serif; font-size: 0.68rem; letter-spacing: 0.15em; color: #666; text-transform: uppercase; margin-bottom: 2rem; display: flex; flex-wrap: wrap; gap: 1.5rem; }
+.byline span { color: #0d0d0d; font-weight: 700; }
+
+.id-card-wrap { border: 2px solid #0d0d0d; margin-bottom: 2.5rem; display: grid; grid-template-columns: 1fr 1fr; }
+.id-half { padding: 1.4rem 1.6rem; }
+.id-half:first-child { border-right: 1px solid #0d0d0d; background: #0d0d0d; color: #f5f0e8; }
+.id-half:last-child { background: #f5f0e8; }
+.id-label { font-family: 'Oswald', sans-serif; font-size: 0.58rem; letter-spacing: 0.35em; text-transform: uppercase; color: #c8a84b; margin-bottom: 0.6rem; }
+.id-name { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; line-height: 1.15; margin-bottom: 0.9rem; }
+.id-field { font-family: 'Oswald', sans-serif; font-size: 0.68rem; letter-spacing: 0.08em; margin-bottom: 0.5rem; text-transform: uppercase; }
+.id-field em { color: #c8a84b; font-style: normal; margin-right: 0.4rem; }
+.id-field span { color: #aaa; }
+.id-half:last-child .id-field span { color: #555; }
+.id-half:last-child .id-field em { color: #0d0d0d; }
+.classification-stamp { display: inline-block; margin-top: 1.2rem; border: 2px solid #c8a84b; padding: 0.3rem 0.8rem; font-family: 'Oswald', sans-serif; font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: #c8a84b; transform: rotate(-2deg); }
+.id-half:last-child .classification-stamp { border-color: #0d0d0d; color: #0d0d0d; transform: rotate(1.5deg); }
+
+.article-body { display: grid; grid-template-columns: 2fr 1fr; gap: 3rem; align-items: start; }
+.main-text p { font-size: 1rem; line-height: 1.88; margin-bottom: 1.4rem; color: #1e1e1e; text-align: justify; }
+.main-text p:first-child::first-letter { font-family: 'Playfair Display', serif; font-size: 4.5rem; font-weight: 900; float: left; line-height: 0.75; margin-right: 0.12em; margin-top: 0.1em; color: #0d0d0d; }
+.pull-quote { border-top: 3px solid #0d0d0d; border-bottom: 3px solid #0d0d0d; padding: 1.2rem 0; margin: 2rem 0; font-family: 'Playfair Display', serif; font-size: 1.3rem; font-style: italic; font-weight: 700; line-height: 1.4; color: #0d0d0d; }
+.section-head { font-family: 'Oswald', sans-serif; font-size: 0.72rem; letter-spacing: 0.32em; text-transform: uppercase; color: #0d0d0d; margin: 2.2rem 0 0.7rem; padding-bottom: 0.4rem; border-bottom: 1px solid #ccc; }
+
+.chart-box { background: #fff; border: 1px solid #ddd; padding: 1.4rem; margin: 2.2rem 0; }
+.chart-box-title { font-family: 'Oswald', sans-serif; font-size: 0.66rem; letter-spacing: 0.22em; text-transform: uppercase; color: #0d0d0d; margin-bottom: 0.25rem; }
+.chart-box-sub { font-size: 0.7rem; font-style: italic; color: #999; margin-bottom: 1rem; }
+.chart-box canvas { width: 100% !important; max-height: 280px; }
+
+.callout-box { background: #0d0d0d; color: #f5f0e8; padding: 1.5rem; margin: 2rem 0; border-left: 6px solid #c8a84b; }
+.callout-box-title { font-family: 'Oswald', sans-serif; font-size: 0.68rem; letter-spacing: 0.3em; text-transform: uppercase; color: #c8a84b; margin-bottom: 0.8rem; }
+.callout-box p { font-size: 0.88rem; line-height: 1.75; color: #bbb; }
+.callout-box strong { color: #f5f0e8; }
+
+.dark-band { background: #1a1a1a; color: #f5f0e8; padding: 4rem 2rem; }
+.dark-band-inner { max-width: 940px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; }
+.dark-stat { text-align: center; padding: 2rem 1.2rem; border: 1px solid #333; }
+.dark-stat-num { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 900; color: #c8a84b; line-height: 1; }
+.dark-stat-unit { font-family: 'Oswald', sans-serif; font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase; color: #888; margin: 0.3rem 0 0.8rem; }
+.dark-stat-desc { font-size: 0.86rem; line-height: 1.65; color: #bbb; }
+
+.chapter-band { background: #f0ebe0; border-top: 3px solid #1a1a1a; border-bottom: 1px solid #ccc; padding: 1.5rem 2rem; }
+.chapter-band-inner { max-width: 940px; margin: 0 auto; display: flex; align-items: baseline; gap: 1.5rem; }
+.chapter-num { font-family: 'Playfair Display', serif; font-size: 4rem; font-weight: 900; color: #c8a84b; line-height: 1; }
+.chapter-label { font-family: 'Oswald', sans-serif; font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: #888; }
+.chapter-title { font-family: 'Playfair Display', serif; font-size: clamp(1.2rem, 2.3vw, 1.8rem); font-weight: 700; line-height: 1.2; color: #1a1a1a; }
+
+.body-wide { max-width: 940px; margin: 0 auto; padding: 3rem 2rem; display: grid; grid-template-columns: 1fr 280px; gap: 3.5rem; align-items: start; }
+.sidebar-right { border-left: 2px solid #1a1a1a; padding-left: 2rem; }
+.body-single { max-width: 720px; margin: 0 auto; padding: 3rem 2rem; }
+.body-single p { font-size: 1rem; line-height: 1.88; margin-bottom: 1.4rem; color: #222; text-align: justify; }
+
+.sidebar { border-left: 2px solid #0d0d0d; padding-left: 1.5rem; }
+.sidebar-box { margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid #ddd; }
+.sidebar-box:last-child { border-bottom: none; }
+.sidebar-title { font-family: 'Oswald', sans-serif; font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase; color: #c8a84b; margin-bottom: 1rem; padding-bottom: 0.4rem; border-bottom: 1px solid #c8a84b; }
+.score-card { background: #0d0d0d; color: #f5f0e8; padding: 1.4rem; text-align: center; margin-bottom: 1.2rem; }
+.score-number { font-family: 'Playfair Display', serif; font-size: 3.6rem; font-weight: 900; color: #c8a84b; line-height: 1; }
+.score-label { font-family: 'Oswald', sans-serif; font-size: 0.6rem; letter-spacing: 0.3em; color: #888; text-transform: uppercase; margin-top: 0.3rem; }
+.trait-row { margin-bottom: 0.9rem; }
+.trait-name { font-family: 'Oswald', sans-serif; font-size: 0.63rem; letter-spacing: 0.12em; text-transform: uppercase; color: #555; margin-bottom: 0.25rem; display: flex; justify-content: space-between; }
+.trait-name strong { color: #0d0d0d; }
+.bar-track { height: 4px; background: #e0d8c8; }
+.bar-fill { height: 100%; background: #0d0d0d; transition: width 1.4s cubic-bezier(0.16,1,0.3,1); width: 0%; }
+.fact-item { display: flex; gap: 0.7rem; align-items: flex-start; margin-bottom: 0.75rem; }
+.fact-bullet { color: #c8a84b; font-size: 0.75rem; margin-top: 0.2rem; flex-shrink: 0; font-family:'Oswald',sans-serif; }
+.fact-text { font-size: 0.78rem; line-height: 1.55; color: #333; }
+
+.witness-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin: 1rem 0; }
+.witness-card { border: 2px solid #0d0d0d; padding: 0.7rem 0.5rem; text-align: center; }
+.witness-icon { font-size: 1.5rem; display: block; margin-bottom: 0.25rem; }
+.witness-label { font-family: 'Oswald', sans-serif; font-size: 0.55rem; letter-spacing: 0.18em; text-transform: uppercase; color: #777; }
+.witness-val { font-family: 'Playfair Display', serif; font-size: 0.85rem; font-weight: 900; color: #0d0d0d; margin-top: 0.2rem; }
+
+.intel-card {
+  background: #f5f0e8; border: 2px solid #0d0d0d;
+  padding: 1.1rem 1.2rem; margin: 1.2rem 0 0.5rem; position: relative;
+}
+.intel-card::before {
+  content: 'FIELD EVIDENCE'; font-family: 'Oswald', sans-serif;
+  font-size: 0.48rem; letter-spacing: 0.3em; color: #c8a84b;
+  display: block; margin-bottom: 0.5rem; padding-bottom: 0.4rem; border-bottom: 1px solid #ddd;
+}
+.intel-row {
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: 'Oswald', sans-serif; font-size: 0.65rem;
+  letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.3rem; color: #555;
+}
+.intel-row strong { color: #0d0d0d; font-size: 0.72rem; }
+
+.footer-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 3rem; padding-top: 1.5rem; border-top: 2px solid #0d0d0d; }
+.tag { font-family: 'Oswald', sans-serif; font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.25rem 0.6rem; border: 1px solid #0d0d0d; color: #0d0d0d; }
+
+.back-to-top-section { margin-top: 3rem; border-top: 3px double #0d0d0d; padding-top: 2rem; text-align: center; }
+.back-to-top-inner { display: inline-block; background: #0d0d0d; border: 2px solid #c8a84b; padding: 1.8rem 3rem; position: relative; }
+.back-to-top-inner::before { content: ''; position: absolute; inset: 4px; border: 1px solid #333; pointer-events: none; }
+.back-to-top-label { font-family: 'Oswald', sans-serif; font-size: 0.58rem; letter-spacing: 0.45em; text-transform: uppercase; color: #555; display: block; margin-bottom: 0.8rem; }
+.back-to-top-btn { display: inline-flex; align-items: center; gap: 0.7rem; background: none; border: 2px solid #c8a84b; color: #c8a84b; font-family: 'Oswald', sans-serif; font-size: 0.8rem; letter-spacing: 0.3em; text-transform: uppercase; padding: 0.7rem 1.8rem; cursor: pointer; transition: all 0.2s; text-decoration: none; }
+.back-to-top-btn:hover { background: #c8a84b; color: #0d0d0d; }
+.back-to-top-sub { font-family: 'Source Serif 4', serif; font-size: 0.7rem; color: #444; font-style: italic; display: block; margin-top: 0.8rem; }
+
+.paper-footer { background: #0d0d0d; color: #555; text-align: center; padding: 1rem 2rem; font-family: 'Oswald', sans-serif; font-size: 0.58rem; letter-spacing: 0.28em; text-transform: uppercase; margin-top: 2rem; border-top: 4px solid #c8a84b; }
+.disclaimer { background: #fff3cd; border-left: 4px solid #c8a84b; padding: 0.8rem 1.2rem; margin-bottom: 2rem; font-size: 0.76rem; color: #555; font-style: italic; }
+.wanted-ribbon { background: #c8a84b; color: #0d0d0d; font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 0.5em; text-transform: uppercase; font-weight: 700; text-align: center; padding: 0.45rem; }
+.dedication { max-width: 720px; margin: 0 auto; padding: 2rem 2rem 0; font-size: 0.78rem; color: #888; font-style: italic; text-align: center; line-height: 1.7; }
+
+@media (max-width: 680px) {
+  .article-body { grid-template-columns: 1fr; }
+  .body-wide { grid-template-columns: 1fr; }
+  .sidebar, .sidebar-right { border-left: none; border-top: 2px solid #0d0d0d; padding-left: 0; padding-top: 1.5rem; }
+  .id-card-wrap { grid-template-columns: 1fr; }
+  .id-half:first-child { border-right: none; border-bottom: 1px solid #333; }
+  .dark-band-inner { grid-template-columns: 1fr; }
+  .witness-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<div class="masthead" id="masthead">
+  <div class="masthead-top">
+    <span>Vol. XLII · No. 107</span>
+    <span>The Daily Forensic · Chrysalis Division</span>
+    <span>Tuesday, 6 May 2026</span>
+  </div>
+  <div class="paper-name">The Daily Forensic</div>
+  <div class="paper-tagline">Truth In Every Pixel · All Subjects Documented Without Consent</div>
+</div>
+
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    Breaking: Local 11th grader confirmed Slytherin for the 47th time this week &nbsp;·&nbsp; Dora the Explorer comparison reaches critical mass, subject reportedly unbothered &nbsp;·&nbsp; Draco Malfoy edit count has exceeded safe operating limits &nbsp;·&nbsp; Chrysalis High Horamavu under full surveillance &nbsp;·&nbsp; Affiliate network of two (2) confirmed tight and exclusive &nbsp;·&nbsp; Muscle authenticity dispute enters third week, no resolution in sight &nbsp;·&nbsp; Stream identity: still classified &nbsp;·&nbsp; Breaking: Local 11th grader confirmed Slytherin for the 47th time this week &nbsp;·&nbsp;
+  </div>
+</div>
+
+<div class="home-link-bar">
+  <a href="#">← The Daily Forensic</a>
+  <span class="sep">·</span>
+  <span style="color:#555;">Subject Dossiers</span>
+  <span class="sep">·</span>
+  <span style="color:#555;">Nayana Baiju</span>
+</div>
+
+<div class="wanted-ribbon">🐍 &nbsp; Slytherin Loyalist · Classified · Eyes Only · Chrysalis High, Horamavu &nbsp; 🐍</div>
+
+<div class="container">
+
+  <div class="disclaimer">
+    <strong>Editorial Clarification, Issued Pre-emptively:</strong> "Baiju" in this document refers exclusively to the subject, Nayana Baiju, Grade 11, Chrysalis High School, Horamavu, Bengaluru. No relation to, association with, confusion with, or resemblance to any tutoring application, edtech platform, or product distributed under a phonetically adjacent corporate trademark is intended, implied, or entertained by this publication. The Daily Forensic regrets having to say this. It says it anyway. Moving on.
+  </div>
+
+  <div class="article-category">Subject Profile · Slytherin Division · 11th Grade Intelligence Dossier</div>
+  <h1 class="headline">The Nayana Baiju Dossier: A Comprehensive Forensic Investigation Into House Allegiance, the Draco Malfoy Edit Industrial Complex, the Dora the Explorer Situation, and Several Other Matters of Urgent Public Importance</h1>
+  <p class="subheadline">Our correspondents embedded themselves in the Chrysalis High, Horamavu ecosystem for an undisclosed period to document one of 11th grade's most formidable presences: a confirmed Slytherin, a self-described lowkey lesbian who is not very lowkey about it, a dedicated spam-distributor of Draco Malfoy content, a wearer of black, a flexer of disputed muscles, and the operating centre of an affiliate network that numbers exactly two.</p>
+  <div class="byline">
+    Investigated by <span>The Daily Forensic Field Bureau</span>
+    &nbsp;·&nbsp; Filed from <span>Horamavu, Bengaluru</span>
+    &nbsp;·&nbsp; Classification: <span>Gold · Level 5 · Eyes Only</span>
+  </div>
+
+  <div class="id-card-wrap">
+    <div class="id-half">
+      <div class="id-label">Subject Identification</div>
+      <div class="id-name">Nayana Baiju</div>
+      <div class="id-field"><em>■</em> Also Known As: <span>Not Byju's. Not the app. Never.</span></div>
+      <div class="id-field"><em>■</em> House: <span>Slytherin (confirmed, repeatedly, unprompted)</span></div>
+      <div class="id-field"><em>■</em> Orientation: <span>Lowkey lesbian (not that lowkey)</span></div>
+      <div class="id-field"><em>■</em> Aesthetic Alignment: <span>Black. Consistently black.</span></div>
+      <div class="id-field"><em>■</em> Dora Comparison Status: <span>Old. Documented. Unwelcome.</span></div>
+      <div class="classification-stamp">Verified · Slytherin · Eyes Only</div>
+    </div>
+    <div class="id-half">
+      <div class="id-label">Operational Details</div>
+      <div class="id-name" style="font-size:1.2rem;">Field Record · 2026</div>
+      <div class="id-field"><em>■</em> Institution: <span>Chrysalis High School, Horamavu</span></div>
+      <div class="id-field"><em>■</em> Grade: <span>11th</span></div>
+      <div class="id-field"><em>■</em> Stream: <span>Currently Under Investigation</span></div>
+      <div class="id-field"><em>■</em> Affiliate One: <span>Andrea Lazareo</span></div>
+      <div class="id-field"><em>■</em> Affiliate Two: <span>Srilasya Pidatahala</span></div>
+      <div class="id-field"><em>■</em> Relationship Status: <span>May or may not be single</span></div>
+      <div class="id-field"><em>■</em> Muscle Authenticity: <span>Disputed (see Section V)</span></div>
+      <div class="classification-stamp">Dossier Vol. XLII No. 107</div>
+    </div>
+  </div>
+
+  <div class="article-body">
+    <div class="main-text">
+
+      <p>Nayana Baiju is many things. She is a Slytherin. She is the operating centre of a precisely sized affiliate network. She is a distributor of Draco Malfoy content at volumes that our media analysis team has described, in an internal memo, as "frankly impressive." She is the subject of a Dora the Explorer comparison that has persisted well past its natural expiry date. She is, by her own account and the general consensus of those around her, a lesbian, and she is this in a manner that she describes as lowkey but which the available evidence suggests is lowkey only in the technical sense of not being announced via megaphone. She wears black. She has flexed muscles whose authenticity remains a matter of active dispute. She is in 11th grade at Chrysalis High School, Horamavu. Her stream is unknown. The Daily Forensic is on the case.</p>
+
+      <p>What we are not, and what this publication must state with some firmness before proceeding, is confused. Nayana Baiju is not Byju's. This has been stated in the disclaimer at the top of this document and is being stated again here because our editorial team assessed that once was not enough. The name similarity is acknowledged, documented, and immediately set aside. We have moved past it. You are invited to do the same.</p>
+
+      <p>The present dossier represents the most comprehensive intelligence package The Daily Forensic has produced on a subject from the Chrysalis High, Horamavu campus. Our field operatives worked across multiple sessions, consulted the available record, triangulated corroborating sources, and produced this report under the understanding that it would be received with the seriousness it deserves. Whether it will be is not something we can guarantee. The subject is, by all accounts, a Slytherin, and Slytherins are not reliably impressed by anything they did not arrange themselves.</p>
+
+      <div class="pull-quote">
+        "She is not confused with a tutoring app. She is a Slytherin. She is wearing black. She has sent you another Draco Malfoy edit. These are the only facts that require your attention."
+      </div>
+
+    </div>
+
+    <div class="sidebar">
+      <div class="sidebar-box">
+        <div class="sidebar-title">Slytherin Loyalty Score</div>
+        <div class="score-card">
+          <div class="score-number">99</div>
+          <div class="score-label">Out of 100 · Confirmed</div>
+        </div>
+        <div class="trait-row">
+          <div class="trait-name"><span>House Pride</span><strong>100%</strong></div>
+          <div class="bar-track"><div class="bar-fill" id="b1"></div></div>
+        </div>
+        <div class="trait-row">
+          <div class="trait-name"><span>Ambition</span><strong>94%</strong></div>
+          <div class="bar-track"><div class="bar-fill" id="b2"></div></div>
+        </div>
+        <div class="trait-row">
+          <div class="trait-name"><span>Draco Edit Output</span><strong>99%</strong></div>
+          <div class="bar-track"><div class="bar-fill" id="b3"></div></div>
+        </div>
+        <div class="trait-row">
+          <div class="trait-name"><span>Cunning</span><strong>88%</strong></div>
+          <div class="bar-track"><div class="bar-fill" id="b4"></div></div>
+        </div>
+        <div class="trait-row">
+          <div class="trait-name"><span>Black Outfit Rate</span><strong>96%</strong></div>
+          <div class="bar-track"><div class="bar-fill" id="b5"></div></div>
+        </div>
+        <div class="trait-row">
+          <div class="trait-name"><span>Lowkey-ness</span><strong>14%</strong></div>
+          <div class="bar-track"><div class="bar-fill" id="b6"></div></div>
+        </div>
+        <div class="trait-row">
+          <div class="trait-name"><span>Muscle Authenticity</span><strong>???</strong></div>
+          <div class="bar-track"><div class="bar-fill" id="b7"></div></div>
+        </div>
+      </div>
+
+      <div class="sidebar-box">
+        <div class="sidebar-title">Affiliate Network</div>
+        <div class="witness-grid">
+          <div class="witness-card">
+            <span class="witness-icon">🌸</span>
+            <div class="witness-label">Affiliate One</div>
+            <div class="witness-val">Andrea Lazareo</div>
+          </div>
+          <div class="witness-card">
+            <span class="witness-icon">⭐</span>
+            <div class="witness-label">Affiliate Two</div>
+            <div class="witness-val">Srilasya Pidatahala</div>
+          </div>
+        </div>
+        <p style="font-size:0.72rem; color:#666; font-style:italic; line-height:1.5; margin-top:0.7rem;">Network size: exactly 2. Selection criteria: classified. Vetting process: presumably extensive. The Daily Forensic was not invited to apply.</p>
+      </div>
+
+      <div class="sidebar-box">
+        <div class="sidebar-title">Key Intelligence Facts</div>
+        <div class="fact-item">
+          <span class="fact-bullet">■</span>
+          <span class="fact-text">Slytherin identification: confirmed, unsolicited, and non-negotiable.</span>
+        </div>
+        <div class="fact-item">
+          <span class="fact-bullet">■</span>
+          <span class="fact-text">Dora the Explorer comparison: vintage, documented, and firmly a sore subject.</span>
+        </div>
+        <div class="fact-item">
+          <span class="fact-bullet">■</span>
+          <span class="fact-text">Draco Malfoy edits: distributed actively, with frequency, and without apology.</span>
+        </div>
+        <div class="fact-item">
+          <span class="fact-bullet">■</span>
+          <span class="fact-text">Aesthetic: black. The data on this point is unambiguous.</span>
+        </div>
+        <div class="fact-item">
+          <span class="fact-bullet">■</span>
+          <span class="fact-text">Muscles flexed: confirmed. Authenticity of muscles: pending resolution.</span>
+        </div>
+        <div class="fact-item">
+          <span class="fact-bullet">■</span>
+          <span class="fact-text">Relationship status: may or may not be single. Filed under: ambiguous.</span>
+        </div>
+        <div class="fact-item">
+          <span class="fact-bullet">■</span>
+          <span class="fact-text">Stream: unknown. The mystery is its own chapter. See Section VII.</span>
+        </div>
+        <div class="fact-item">
+          <span class="fact-bullet">■</span>
+          <span class="fact-text">Lesbian status: stated as lowkey. Filed under: not very lowkey at all.</span>
+        </div>
+      </div>
+
+      <div class="sidebar-box">
+        <div class="sidebar-title">Fig. C · Lowkey vs. Reality</div>
+        <div style="font-size:0.68rem; font-style:italic; color:#999; margin-bottom:0.8rem;">Stated lowkey-ness versus observable disclosure rate. Source: the original brief, which listed it twice.</div>
+        <canvas id="lowkeyChart" style="max-height:200px; width:100%!important;"></canvas>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- CHAPTER I -->
+<div class="chapter-band">
+  <div class="chapter-band-inner">
+    <div class="chapter-num">I</div>
+    <div>
+      <div class="chapter-label">Chapter One</div>
+      <div class="chapter-title">The Slytherin Question: Investigated, Confirmed, and Not Open for Further Debate</div>
+    </div>
+  </div>
+</div>
+
+<div class="body-wide">
+  <div class="main-text">
+
+    <p>The question of whether Nayana Baiju is a Slytherin is not, in any meaningful sense, a question. It is a settled fact. It is, in the taxonomy of identities that the subject holds dear, the most foundational. Our field operatives, across multiple documented interactions and embedded observation periods, were unable to locate a single instance in which the subject expressed uncertainty about this. The Slytherin identification is not tentative. It is not aspirational. It does not require external validation, sorting hat ceremonies, or Pottermore quizzes that come back inconvenient. Nayana Baiju is a Slytherin. This is a load-bearing element of her identity, and anyone who suggests otherwise is invited to have that conversation with her directly, which The Daily Forensic notes would itself be a very Slytherin thing to suggest.</p>
+
+    <p>The qualities associated with Slytherin house are well documented across the source material, and our analysis team has cross-referenced each one against the available evidence on Nayana Baiju. Ambition: present and unambiguous. Resourcefulness: strongly indicated by the construction and maintenance of a tight affiliate network under conditions that most people would find socially demanding. Determination: evidenced by a willingness to bring up house affiliation in conversational contexts where it was not strictly relevant, and to do so with the confidence of someone who has never once doubted the answer. Cunning: suggested by the "lowkey lesbian" framing, which on closer inspection is not lowkey at all but is phrased in a way that sounds modest, which is a distinctly Slytherin manoeuvre.</p>
+
+    <p>Then there is the matter of Draco Malfoy, which is treated in its own dedicated chapter but warrants a mention here because it is entirely germane to the house question. Draco Malfoy is himself a Slytherin. He is, arguably, the most prominent Slytherin in the available literary and cinematic record. The fact that Nayana Baiju distributes edits of him at a rate that has taxed the storage capacity of at least one affiliated device is not a coincidence. It is, our analysts contend, an expression of house solidarity that extends well past the fictional frame and into the realm of genuine identity alignment. She is not just a Slytherin who happens to like Draco Malfoy. The relationship between these two data points is structural.</p>
+
+    <div class="pull-quote">
+      "She has never, not once, expressed doubt about her house. The Daily Forensic has never, not once, encountered a subject more certain of anything."
+    </div>
+
+    <p>It should also be noted, for the academic record, that the house of Slytherin has a complicated reputation in the broader cultural landscape, and that Nayana Baiju is entirely unbothered by this. The association of Slytherin with ambition, moral flexibility, and a willingness to pursue one's objectives by whatever means present themselves is not, for her, a caveat to be managed or apologised for. It is, our operatives report, a feature. The subject does not lean away from the reputation. She leans in. Our analysts have flagged this as deeply consistent with the house in question, which is itself reassuring from a data integrity standpoint.</p>
+
+    <div class="chart-box">
+      <div class="chart-box-title">Fig. A · Slytherin Trait Index: Nayana Baiju vs. Average 11th Grade Peer</div>
+      <div class="chart-box-sub">Radar assessment across core Slytherin identity metrics. Source: The Daily Forensic Field Bureau, 2026. Peer reviewed by one peer, who nodded.</div>
+      <canvas id="slytherinRadar"></canvas>
+    </div>
+
+    <div class="callout-box">
+      <div class="callout-box-title">Analyst Annotation · Unsolicited House Mention Rate</div>
+      <p>Of all subjects profiled by The Daily Forensic across the current academic year, <strong>Nayana Baiju</strong> registers the highest rate of unsolicited Hogwarts house mentions per unit of observed interaction. She has reportedly identified as Slytherin in contexts where no Harry Potter reference was initiated, present, or even distantly implied. One source described an incident involving a group discussion about coursework scheduling in which the subject introduced her house affiliation organically, without transition, and without apparent awareness that this was unusual. Our methodology team has filed this under <strong>"remarkable dedication"</strong> and updated their models accordingly.</p>
+    </div>
+
+  </div>
+  <div class="sidebar-right">
+    <div class="sidebar-box">
+      <div class="sidebar-title">House Verdict</div>
+      <div class="score-card">
+        <div class="score-number">🐍</div>
+        <div class="score-label">Slytherin · Settled Science</div>
+      </div>
+      <p style="font-size:0.78rem; line-height:1.6; color:#444;">The Daily Forensic does not grade on a curve. The data is the data. Nayana Baiju is a Slytherin at a confidence level of 99.97%. The remaining 0.03% is the margin we reserve for situations where every data point we have collected is wrong simultaneously.</p>
+    </div>
+    <div class="sidebar-box">
+      <div class="sidebar-title">Slytherin Alignment Evidence</div>
+      <div class="fact-item"><span class="fact-bullet">■</span><span class="fact-text">Black wardrobe: aligns with house aesthetic.</span></div>
+      <div class="fact-item"><span class="fact-bullet">■</span><span class="fact-text">Draco Malfoy devotion: intra-house loyalty at peak levels.</span></div>
+      <div class="fact-item"><span class="fact-bullet">■</span><span class="fact-text">Small, exclusive affiliate network: textbook Slytherin selectivity.</span></div>
+      <div class="fact-item"><span class="fact-bullet">■</span><span class="fact-text">"Lowkey" framing of non-lowkey information: the Slytherin art of studied understatement.</span></div>
+      <div class="fact-item"><span class="fact-bullet">■</span><span class="fact-text">Willingness to bring up the house unprompted: confidence bordering on institutional.</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS BAND 1 -->
+<div class="dark-band">
+  <div class="dark-band-inner">
+    <div class="dark-stat">
+      <div class="dark-stat-num">2×</div>
+      <div class="dark-stat-unit">Lesbian Mentions in Brief</div>
+      <div class="dark-stat-desc">The original source document listed the subject's orientation twice. The Daily Forensic has interpreted this as emphasis and has responded accordingly. Point received.</div>
+    </div>
+    <div class="dark-stat">
+      <div class="dark-stat-num">∞</div>
+      <div class="dark-stat-unit">Draco Malfoy Edits</div>
+      <div class="dark-stat-desc">No ceiling has been established. Our infrastructure team has been briefed. We have accepted that this number will not decrease over time and have adjusted our projections.</div>
+    </div>
+    <div class="dark-stat">
+      <div class="dark-stat-num">0</div>
+      <div class="dark-stat-unit">Streams Confirmed</div>
+      <div class="dark-stat-desc">The 11th grade stream of the subject is listed as unknown. The investigation is open. The Daily Forensic has assigned two analysts and anticipates a resolution in due course.</div>
+    </div>
+  </div>
+</div>
+
+<!-- CHAPTER II -->
+<div class="chapter-band">
+  <div class="chapter-band-inner">
+    <div class="chapter-num">II</div>
+    <div>
+      <div class="chapter-label">Chapter Two</div>
+      <div class="chapter-title">The Dora the Explorer Situation: A Complete Archaeological Record of an Unwanted Comparison</div>
+    </div>
+  </div>
+</div>
+
+<div class="body-single">
+  <p>The Dora the Explorer comparison is old. This is the first thing that must be established. It is not new. It is not fresh. It is not a discovery that anyone in Nayana Baiju's immediate social orbit has recently made and is reporting with the excitement of genuine novelty. It is a vintage comparison, worn smooth by repeated use, familiar in the way that a joke told too many times becomes less a joke and more a piece of furniture. The Daily Forensic documents it here not because it requires further circulation but because archival completeness demands it, and because our methodology does not permit selective omission simply because a data point might make the subject visibly tired.</p>
+
+  <p>The comparison, for those arriving at this dossier without prior context, is between Nayana Baiju and Dora the Explorer, the animated protagonist of the children's educational programme of the same name. The original Dora, for the purposes of establishing a baseline, is characterised by several traits: a short, blunt haircut, a confident bearing, a fondness for adventure and navigation, a tendency to speak directly to whoever is in front of her, and an approach to problem-solving that is both enthusiastic and utterly unintimidated by obstacles. She is accompanied by a small backpack and an even smaller monkey. She asks questions. She waits for answers. She then proceeds regardless.</p>
+
+  <p>Our analysts have reviewed the available evidence on Nayana Baiju and have arrived at a conclusion that they have asked us not to share too directly for fear of the consequences. We can report, in the most diplomatically restrained language available to this publication, that the comparison did not emerge from nowhere. There is, in the forensic record, something there. What exactly that something is, and how closely it maps to the specific parameters of the Dora resemblance framework, is information we are choosing, at this time, to present without further elaboration. The subject is in 11th grade. She knows where we work.</p>
+
+  <div class="pull-quote">
+    "The comparison is old. The subject is aware. The subject has been aware for some time. This is its own kind of data."
+  </div>
+
+  <div style="margin: 2.2rem 0; border: 2px solid #0d0d0d;">
+    <div style="background:#0d0d0d; padding:0.5rem 1rem; display:flex; justify-content:space-between; align-items:center;">
+      <span style="font-family:'Oswald',sans-serif; font-size:0.6rem; letter-spacing:0.35em; text-transform:uppercase; color:#c8a84b;">Exhibit A · Photographic Evidence · Filed by Field Bureau</span>
+      <span style="font-family:'Oswald',sans-serif; font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; color:#555;">Classification: Confirmed</span>
+    </div>
+    <div style="background:#1a1a1a; display:flex; justify-content:center; align-items:center; padding: 2rem; min-height:340px; position:relative;">
+      <div style="position:absolute; top:12px; right:14px; background:#c8a84b; color:#0d0d0d; font-family:'Oswald',sans-serif; font-size:0.48rem; letter-spacing:0.25em; text-transform:uppercase; font-weight:700; padding:0.2rem 0.5rem;">Primary Source</div>
+      <img src="1.jpeg" alt="Nayana Baiju — Photographic Comparison Evidence" style="max-height:380px; max-width:100%; object-fit:contain; display:block; filter:contrast(1.05) brightness(0.97);" />
+    </div>
+    <div style="background:#f5f0e8; border-top:1px solid #c8a84b; padding:0.8rem 1.2rem;">
+      <span style="font-family:'Oswald',sans-serif; font-size:0.58rem; letter-spacing:0.2em; text-transform:uppercase; color:#c8a84b; display:block; margin-bottom:0.2rem;">Fig. Photo-A · Primary Comparative Evidence</span>
+      <span style="font-family:'Source Serif 4',serif; font-size:0.75rem; color:#555; font-style:italic; line-height:1.5;">Photographic exhibit submitted to The Daily Forensic field bureau. The resemblance framework, it must be noted, did not require our analysts to look very hard. The subject's reaction to this exhibit being included in a formal dossier has been pre-emptively classified as "not good for us." We have filed it anyway. Source: The Record.</span>
+    </div>
+  </div>
+
+  <p>What can be said, with full forensic confidence, is that the comparison has persisted across what our timeline reconstruction estimates to be a significant period of Nayana Baiju's life. The fact that it has survived long enough to be included as a bullet point in a formal intelligence brief suggests that it is not a joke she has successfully retired. It is, rather, a joke that has retired itself into a kind of ambient background hum: present, acknowledged, neither confirmed nor denied by the subject, and apparently immortal in the way that all jokes about your appearance eventually become when the people around you are committed enough.</p>
+
+  <p>The Daily Forensic notes, for the record, that Dora the Explorer is a competent, self-sufficient, and genuinely impressive individual by the standards of her medium. She navigates complex terrain. She builds coalitions. She achieves her objectives consistently and on schedule. If the comparison lands anywhere near accurate, Nayana Baiju should consider it less of an insult and more of a highly specific personality assessment. We offer this not as consolation but as genuine editorial analysis. We also offer it knowing full well that it will not land as consolation, because the subject is a Slytherin and will not be managed into feeling better about a joke she did not approve.</p>
+
+  <div class="chart-box">
+    <div class="chart-box-title">Fig. B · The Dora Resemblance Framework: Field Assessment</div>
+    <div class="chart-box-sub">Comparative analysis across key attributes. Data collected from sources who requested anonymity and proximity to the nearest exit. The Daily Forensic, 2026.</div>
+    <canvas id="doraChart"></canvas>
+  </div>
+
+  <div class="callout-box">
+    <div class="callout-box-title">Editorial Note · On the Continued Survival of This Comparison</div>
+    <p>The Daily Forensic has, in its investigative history, encountered many subjects who have attempted to formally retire an unwanted nickname or comparison. The survival rate of said retirements is poor. Jokes, like invasive species, establish themselves in ecosystems that suit them and persist long past the point where anyone wanted them to. The Dora comparison has, by the evidence available to us, established itself firmly. It has found its ecosystem. It has put down roots. <strong>The Daily Forensic advises against attempting to uproot it,</strong> on the grounds that this has clearly already been tried, and against engaging with it, on the grounds that engagement tends to feed it. The only available strategy is dignified silence and, ultimately, the passage of time. This dossier will not help with either of those things. We apologise.</p>
+  </div>
+
+</div>
+
+<!-- CHAPTER III -->
+<div class="chapter-band">
+  <div class="chapter-band-inner">
+    <div class="chapter-num">III</div>
+    <div>
+      <div class="chapter-label">Chapter Three</div>
+      <div class="chapter-title">The Draco Malfoy Edit Industrial Complex: Scale, Scope, and Downstream Impact</div>
+    </div>
+  </div>
+</div>
+
+<div class="body-wide">
+  <div class="main-text">
+
+    <p>Let us be precise about the terminology before proceeding. When the source material states that Nayana Baiju "likes to spam Draco Malfoy edits," it is using the word "spam" in a descriptive, volume-related sense. It is not a criticism. It is a measurement. The Daily Forensic has adopted the same framework. What we are documenting in this chapter is not the quality of the edits, which we have no grounds to assess, nor the subject's taste, which we have no standing to challenge. What we are documenting is the pipeline: the regularity, the frequency, the apparent inexhaustibility of a practice that has become, by all available evidence, a defining feature of Nayana Baiju's digital presence.</p>
+
+    <p>Draco Malfoy edits, for readers arriving at this document without relevant background, are a well-established form of fan-created media in which footage, images, or audio associated with the character Draco Malfoy are assembled, typically with music, often with a specific aesthetic, and distributed to an audience that has either requested them or is about to receive them regardless. The edit as a form sits somewhere between tribute, aesthetic exercise, and argument. A well-constructed Draco edit is making a case: that the character is compelling, that the performer is worth the attention, that there is something in this particular assembly of images and sound that justifies the distribution. Nayana Baiju, our sources confirm, makes this case often and at volume.</p>
+
+    <p>The affiliate network, consisting of Andrea Lazareo and Srilasya Pidatahala, appears to be the primary receiving infrastructure for this content, though our intelligence suggests the distribution radius may extend beyond the documented two. What we can confirm is that the edits move. They are created or sourced, they are dispatched, and they arrive at their destinations with a regularity that suggests not a casual hobby but a committed practice with its own internal schedule. One source, who requested that we not specify exactly how they knew this, described the experience of receiving a Draco Malfoy edit from Nayana Baiju as "inevitable," which is a word our analysts have highlighted and are sitting with.</p>
+
+    <div class="pull-quote">
+      "The edits move. They arrive. They continue to arrive. Our logistics team has modelled the trajectory and cannot identify a natural endpoint."
+    </div>
+
+    <p>The connection between the Draco Malfoy edit pipeline and the Slytherin identification has been addressed briefly in the preceding chapter, but it warrants further treatment here. Draco Malfoy is not a character about whom one is casually interested. He occupies a specific position in the cultural landscape: morally complicated, aesthetically deliberate, house-loyal to a fault, and the subject of a kind of devoted attention from a specific demographic that The Daily Forensic has spent considerable time studying. The profile of the dedicated Draco Malfoy fan overlaps, with some precision, with the profile of someone who identifies strongly as Slytherin. This is not coincidence. It is coherence. Nayana Baiju's interests are internally consistent in a way that our profiling team found genuinely satisfying to map.</p>
+
+    <p>There is also, our analysts note, something strategically sound about the edit as a communication format. An edit is a curated thing. It is not a raw piece of content; it is an argument in aesthetic form. To spam edits is not simply to share a lot of pictures. It is to assert, repeatedly and with evidence, that the subject of those edits merits the sustained attention of everyone in your network. It is a form of advocacy. For a Slytherin, whose house values include a certain strategic orientation toward information and influence, the edit pipeline can be understood less as a hobby and more as a practice. The Daily Forensic does not overread. We simply note the pattern and let it stand.</p>
+
+    <div class="chart-box">
+      <div class="chart-box-title">Fig. D · Interest Distribution: Proportional Allocation of Observed Time and Energy</div>
+      <div class="chart-box-sub">Based on field observation and source briefing. Total may exceed 100% due to the subject's apparent capacity to do several things at once. The Daily Forensic Field Bureau, 2026.</div>
+      <canvas id="interestChart"></canvas>
+    </div>
+
+  </div>
+  <div class="sidebar-right">
+    <div class="sidebar-box">
+      <div class="sidebar-title">Draco Edit Statistics</div>
+      <div class="score-card">
+        <div class="score-number">∞</div>
+        <div class="score-label">Estimated Total Edits Dispatched</div>
+      </div>
+      <p style="font-size:0.75rem; color:#555; line-height:1.6;">No upper bound has been established. Our infrastructure team has been advised. Our projections team has declined to produce a projection on the grounds that any number they submit will be superseded before it can be filed.</p>
+    </div>
+    <div class="sidebar-box">
+      <div class="sidebar-title">Edit Pipeline Intel</div>
+      <div class="intel-card">
+        <div class="intel-row"><span>Subject:</span><strong>Draco Malfoy</strong></div>
+        <div class="intel-row"><span>Format:</span><strong>Video / Image Edits</strong></div>
+        <div class="intel-row"><span>Frequency:</span><strong>Regular, Unsolicited</strong></div>
+        <div class="intel-row"><span>Primary Recipients:</span><strong>Andrea, Srilasya</strong></div>
+        <div class="intel-row"><span>Quality Control:</span><strong>Assumed High</strong></div>
+        <div class="intel-row"><span>Subject's Awareness:</span><strong>Complete</strong></div>
+      </div>
+    </div>
+    <div class="sidebar-box">
+      <div class="sidebar-title">Why Draco? A Theory</div>
+      <p style="font-size:0.76rem; line-height:1.6; color:#444; font-style:italic;">Draco Malfoy is: a Slytherin, aesthetically deliberate, morally complicated, deeply loyal to his house, and the subject of an enormous body of fan-created content. Nayana Baiju is: a self-confirmed Slytherin with strong aesthetic instincts. The Daily Forensic does not require further data to model this alignment.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CHAPTER IV -->
+<div class="chapter-band">
+  <div class="chapter-band-inner">
+    <div class="chapter-num">IV</div>
+    <div>
+      <div class="chapter-label">Chapter Four</div>
+      <div class="chapter-title">On the Lesbianism: Lowkey in Theory, Well-Documented in Practice</div>
+    </div>
+  </div>
+</div>
+
+<div class="body-single">
+  <p>The original intelligence brief submitted to The Daily Forensic described Nayana Baiju as "lowk lesbian," a phrase that our transcription team has rendered as "lowkey lesbian" for the purposes of this formal document. The use of the term "lowkey" here is interesting, and we intend to spend a paragraph on it, because language is data and this particular word choice is telling. "Lowkey," as deployed in contemporary usage, is typically meant to signal that something is present but subdued, acknowledged but not amplified, real but perhaps not fully announced. It is a hedging mechanism. It says: yes, this is true, but I am not making a whole thing of it.</p>
+
+  <p>The Daily Forensic respects this framing. We also note, with the forensic rigour for which this publication is known, that the brief listed the subject's orientation twice. Not once. Twice. The entry "lowk lesbian" appears in the second position on the source document, and a variation, "did I mention lesbian?", appears in the sixth position, formatted as a question that is not really a question but rather a rhetorical device confirming that the information was meant to land and that the person submitting it wanted to make sure it had. This is not lowkey behaviour. This is emphasis. The Daily Forensic has noted the emphasis. The emphasis has been filed.</p>
+
+  <p>We document this without editorial commentary on the substance of the identity itself, which is Nayana Baiju's to hold and describe however she chooses, but with some friendly forensic observations about the gap between the stated "lowkey" and the observable evidence. A truly lowkey orientation does not appear twice in a bullet-pointed brief submitted to a newspaper. It does not warrant a standalone reminder in parentheses. It does not generate a rhetorical question as a follow-up. What we have here is, by the available data, something that the subject has perhaps decided to describe as lowkey out of a preference for not making a large announcement, but which is nonetheless thoroughly present, acknowledged by those around her, and treated as part of her established identity in all relevant social contexts. This is fine. Many things are lowkey in framing and thoroughly not lowkey in practice. The Daily Forensic has documented both the framing and the practice and leaves the reconciliation to the reader.</p>
+
+  <div class="pull-quote">
+    "Lowkey. Listed twice. Our analysts have reviewed the data and the data does not suggest lowkey. We have chosen to document both the claim and the evidence and allow them to coexist."
+  </div>
+
+  <p>It is worth noting, also, that the lesbian identity and the Slytherin identity coexist in a way that the subject appears to find entirely natural. Our profiling team, which tracks identity coherence as a metric, reported no tension between these data points. They occupy the same space comfortably. Both are held with a similar quality of certainty: not aggressive, not performative, but deeply settled, in the manner of someone who arrived at these truths some time ago and has simply been living in them since. The Daily Forensic finds this, as a purely analytical matter, worth noting. Identity certainty is a relatively rare finding at any grade level.</p>
+
+</div>
+
+<!-- CHAPTER V -->
+<div class="chapter-band">
+  <div class="chapter-band-inner">
+    <div class="chapter-num">V</div>
+    <div>
+      <div class="chapter-label">Chapter Five</div>
+      <div class="chapter-title">The Muscle Dispute: A Forensic Investigation Into a Flex of Unknown Authenticity</div>
+    </div>
+  </div>
+</div>
+
+<div class="body-wide">
+  <div class="main-text">
+
+    <p>Of all the items in this dossier, the muscle situation is the one that has occupied our forensic anthropology department the longest. The original brief states, with the brevity that marks a truly confident claim, that the subject "flexed fake muscles." This sentence contains a subject, a verb, and a qualifier, and it raises, upon reflection, an extraordinary number of questions that our team has been working through methodically and without, as of press time, reaching a satisfactory resolution.</p>
+
+    <p>The first question is definitional. What constitutes a fake muscle, in the context of a flex? There are several interpretive frameworks available. Under the first framework, "fake" refers to the absence of muscle mass: the subject performed the physical gesture of a flex without the corresponding anatomical substance to back it up. The arm went into the classic position. The bicep did not substantially respond. The performance exceeded the reality. This is the most literal interpretation and produces an image that is both vivid and forensically plausible.</p>
+
+    <p>Under the second framework, "fake" is used loosely, as an intensifier or descriptor, to convey that the flex was theatrical, exaggerated, or performed for comic rather than demonstrative effect. In this reading, there may be perfectly adequate muscles present. The "fake" refers not to their absence but to the self-aware, performative character of the flex itself. The subject knew the flex was for effect. The audience knew the flex was for effect. Everyone was in on it. The muscles, real or otherwise, were beside the point.</p>
+
+    <div class="pull-quote">
+      "She flexed. The muscles are disputed. The flex itself is not in dispute. The flex happened. We can confirm the flex."
+    </div>
+
+    <p>Under the third framework, which our more philosophically inclined analysts have proposed and which the rest of the team has accepted under mild protest, all muscles flexed for social purposes are in some sense performed, and the line between "real" and "fake" in this context collapses under scrutiny. Every flex is a flex. The sincerity of the underlying musculature is secondary to the social function of the gesture. In this reading, Nayana Baiju flexed with intention and in context, and whether the muscles were "real" is a question that the moment itself renders somewhat beside the point.</p>
+
+    <p>What can be said with full confidence is this: the flex occurred. The briefing document is clear on this. The flex is documented. Its authenticity is disputed. Its existence is not. The Daily Forensic has filed the flex in the confirmed events column, placed the muscle assessment in the disputed findings column, and moved on with the rest of the dossier. Should further evidence emerge, we will update the record accordingly.</p>
+
+    <div class="chart-box">
+      <div class="chart-box-title">Fig. E · Personality Radar: Nayana Baiju vs. Average 11th Grade Peer</div>
+      <div class="chart-box-sub">Comparative radar across documented identity traits. Average peer data is estimated. Do not over-index on the average peer. The Daily Forensic, 2026.</div>
+      <canvas id="personalityRadar"></canvas>
+    </div>
+
+  </div>
+  <div class="sidebar-right">
+    <div class="sidebar-box">
+      <div class="sidebar-title">Muscle Investigation Status</div>
+      <div class="score-card">
+        <div class="score-number">?</div>
+        <div class="score-label">Authenticity · Unresolved</div>
+      </div>
+      <p style="font-size:0.75rem; color:#555; line-height:1.6;">The flex is confirmed. The muscles are disputed. The investigation is open. The Daily Forensic's anthropology department has submitted a formal request for further evidence and has not received a response.</p>
+    </div>
+    <div class="sidebar-box">
+      <div class="sidebar-title">Interpretive Frameworks</div>
+      <div class="fact-item"><span class="fact-bullet">■</span><span class="fact-text">Framework A: No muscle present. Pure gesture.</span></div>
+      <div class="fact-item"><span class="fact-bullet">■</span><span class="fact-text">Framework B: Muscle present but performance exaggerated for effect.</span></div>
+      <div class="fact-item"><span class="fact-bullet">■</span><span class="fact-text">Framework C: All flexes are performed. The distinction is philosophically void.</span></div>
+      <div class="fact-item" style="margin-top:0.5rem;"><span class="fact-bullet">■</span><span class="fact-text"><em>Current consensus: the flex happened. Everything else is disputed.</em></span></div>
+    </div>
+    <div class="sidebar-box">
+      <div class="sidebar-title">What Is Not in Dispute</div>
+      <p style="font-size:0.76rem; color:#444; line-height:1.65; font-style:italic;">The flex occurred. This is in the record. The social context of the flex is documented. The description of the muscles as "fake" has been submitted by a source. The Daily Forensic does not adjudicate. We file.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CHAPTER VI -->
+<div class="chapter-band">
+  <div class="chapter-band-inner">
+    <div class="chapter-num">VI</div>
+    <div>
+      <div class="chapter-label">Chapter Six</div>
+      <div class="chapter-title">The Affiliate Network: Andrea Lazareo and Srilasya Pidatahala, Documented</div>
+    </div>
+  </div>
+</div>
+
+<div class="body-single">
+  <p>The affiliate network of Nayana Baiju consists of two individuals: Andrea Lazareo and Srilasya Pidatahala. It has consisted of two individuals for the duration of our observation period and shows no signs of expanding. This is a deliberate configuration, not an accidental one. Nayana Baiju is a Slytherin. Slytherins do not build large, indiscriminate social networks. They build precise ones. The network is small because small networks can be maintained with greater quality, greater loyalty, and a significantly lower tolerance for the kind of ambient social noise that comes with adding people whose allegiances and temperaments have not been fully vetted.</p>
+
+  <p>Andrea Lazareo occupies a confirmed position within the network as Affiliate One. Her operational role, the specific nature of her contribution to the ecosystem, and the precise qualities that earned her network membership have not been fully mapped by our intelligence division. What we can confirm is that she is listed, by name, in the original brief, which means her presence in Nayana Baiju's social landscape is sufficiently established to be considered definitional. She is not a peripheral figure. She is documented. She is in the network. This is a thing that not very many people can say.</p>
+
+  <p>Srilasya Pidatahala holds the position of Affiliate Two with a corresponding status. She is also listed in the brief. She is also documented. Her spelling, we note, was among the corrections submitted to this publication along with the instruction to produce this expanded edition, which suggests that she is known well enough for her name to be a matter of editorial record, and that the editorial record should get the name right. The Daily Forensic has corrected the spelling. Srilasya Pidatahala. We note it here a second time because the name is important and getting names right is a matter of basic forensic integrity.</p>
+
+  <div class="pull-quote">
+    "Two affiliates. Named. Documented. The network is exactly the size it is supposed to be, which is to say: exactly as large as necessary and not one person larger."
+  </div>
+
+  <p>What the two affiliates share, beyond their documented connection to the subject, is not something our intelligence package contains in detail. What our analysts can model, from the available evidence, is that both have been recipients of the Draco Malfoy edit pipeline, which means they have cleared at minimum one significant threshold. The edit distribution is not random. It goes where it is directed. The fact that both Andrea Lazareo and Srilasya Pidatahala are in that distribution means they have been assessed, by whatever internal criteria Nayana Baiju applies, as suitable recipients. Our profiling team has flagged this as a meaningful data point and recommended that any future investigation into the affiliate network begin with an analysis of edit reception history. The investigation is ongoing.</p>
+
+</div>
+
+<!-- CHAPTER VII -->
+<div class="chapter-band">
+  <div class="chapter-band-inner">
+    <div class="chapter-num">VII</div>
+    <div>
+      <div class="chapter-label">Chapter Seven</div>
+      <div class="chapter-title">The Unknown Stream: A Mystery, A Question, and Possibly a Philosophy</div>
+    </div>
+  </div>
+</div>
+
+<div class="body-single">
+  <p>The stream of Nayana Baiju in 11th grade at Chrysalis High School, Horamavu is unknown. This is not a gap in our intelligence. It is a gap in the original brief. The subject's academic stream was listed, simply, as "unknown." Our editors discussed whether to pursue this line of inquiry and ultimately decided that the unknown stream is itself a data point of some significance, not because of what it reveals about her academic trajectory, but because of what it suggests about the priorities and identity of the person being documented.</p>
+
+  <p>The stream, in the Indian educational context, is often treated as a defining sorting mechanism, a first great categorisation of what a person is supposed to become. Science streams produce engineers and doctors. Commerce streams produce accountants and entrepreneurs. Humanities streams produce people who are good at things that are harder to categorise but equally important. The sorting happens early. It carries weight. And in the dossier of Nayana Baiju, it is listed as unknown, which means either that the information was not available at the time of the brief or that the subject has not yet committed to a categorisation, which is itself a kind of statement.</p>
+
+  <p>A Slytherin, our analysts note, does not submit easily to classification imposed from outside. The stream is a system. The system has expectations. Whether Nayana Baiju has engaged with the system on her own terms, deferred the engagement, or simply not yet found a stream that maps to what she actually intends to do is something we cannot determine from the available data. What we can say is that the stream question is open and that The Daily Forensic has filed it as an ongoing inquiry under the heading of "things that will be answered in due course, probably when the subject decides they should be."</p>
+
+  <div class="callout-box">
+    <div class="callout-box-title">Stream Status · Official Filing</div>
+    <p>The stream of Nayana Baiju is currently unknown. The Daily Forensic has assigned one analyst to this question. The analyst has confirmed that the stream is unknown. We are aware that this is not an advance on our position. <strong>The investigation remains open.</strong> We expect to have further information when we have further information. This is our formal position on the matter.</p>
+  </div>
+
+  <p>We close this chapter with an observation that our editorial board found relevant. The rest of this dossier is remarkably well-populated with data. We know the house. We know the aesthetic. We know the edits. We know the affiliates. We know the flex. We know the comparison. We know the orientation, stated twice for emphasis. What we do not know is the stream. In a document full of certainties, the stream stands alone as the open question. This is, perhaps, as Nayana Baiju intended. Or perhaps it is not. The Daily Forensic documents what it can and acknowledges what it cannot. The stream remains pending.</p>
+
+</div>
+
+<!-- STATS BAND 2 -->
+<div class="dark-band">
+  <div class="dark-band-inner">
+    <div class="dark-stat">
+      <div class="dark-stat-num">1</div>
+      <div class="dark-stat-unit">School. One School.</div>
+      <div class="dark-stat-desc">Chrysalis High, Horamavu. This is where the subject is. This is where the dossier is filed from. Our correspondents have confirmed the address.</div>
+    </div>
+    <div class="dark-stat">
+      <div class="dark-stat-num">11</div>
+      <div class="dark-stat-unit">Grade</div>
+      <div class="dark-stat-desc">Nayana Baiju is in 11th grade. She is 11th grade's problem and 11th grade's privilege. The Daily Forensic documents this without further comment.</div>
+    </div>
+    <div class="dark-stat">
+      <div class="dark-stat-num">2</div>
+      <div class="dark-stat-unit">Affiliates. Exactly Two.</div>
+      <div class="dark-stat-desc">Andrea Lazareo. Srilasya Pidatahala. The network is complete. Applications are not being accepted. The Daily Forensic has confirmed this through two independent sources.</div>
+    </div>
+  </div>
+</div>
+
+<!-- CONCLUDING SECTION -->
+<div class="body-single">
+
+  <div class="section-head" style="max-width:720px; margin: 3rem auto 0.7rem;">Concluding Assessment · The Daily Forensic Editorial Board</div>
+
+  <p>At the conclusion of this investigation, The Daily Forensic's editorial board convened to assess the subject as a whole and to determine whether the assembled data points produce a coherent portrait or merely a list of disconnected characteristics. The conclusion, reached after extended deliberation, is that they produce a portrait. The coherence is high.</p>
+
+  <p>Nayana Baiju is a person in whom things hang together. The Slytherin identity supports the exclusive affiliate network. The exclusive affiliate network supports the targeted distribution of Draco Malfoy content. The Draco Malfoy content supports and is supported by the Slytherin identity. The black wardrobe aligns with the aesthetic logic of all of the above. The "lowkey" framing of the lesbian identity sits in productive tension with the fact that it was listed twice, which tells us something about how the subject presents versus how the subject is experienced by those around her. The flex is a flex. The Dora comparison is documented and filed. The stream is unknown and will remain so until it isn't.</p>
+
+  <p>The Daily Forensic does not produce verdicts on persons. That is not our mandate. Our mandate is documentation: to observe, to record, to organise, and to present. What we can say, in the language of our editorial charter, is that Nayana Baiju is a subject who has, in the course of this investigation, emerged clearly from the data. She is not ambiguous. She is not difficult to understand. She is, in the most precise forensic sense of the word, herself, with a thoroughness that most of the people we document do not manage at twice her age. The snake is on the wall. The edits have been sent. The muscles may or may not be real. The stream remains pending.</p>
+
+  <p>We close the file. We leave the file open. Both are true. That is how investigations end when the subject is still in 11th grade and the data is still accumulating. The Daily Forensic will be watching. We always are.</p>
+
+  <div class="chart-box">
+    <div class="chart-box-title">Fig. F · Comprehensive Identity Coherence Index: Key Attributes in Relation</div>
+    <div class="chart-box-sub">All documented traits mapped proportionally. A coherent subject produces a coherent chart. We note that this chart is, in fact, coherent. Source: The Daily Forensic, 2026.</div>
+    <canvas id="coherenceChart"></canvas>
+  </div>
+
+  <div class="footer-tags">
+    <span class="tag">Slytherin</span>
+    <span class="tag">11th Grade Intel</span>
+    <span class="tag">Chrysalis High</span>
+    <span class="tag">Horamavu</span>
+    <span class="tag">Draco Malfoy Studies</span>
+    <span class="tag">Dora Adjacent</span>
+    <span class="tag">The Daily Forensic</span>
+    <span class="tag">Affiliate Network</span>
+    <span class="tag">Muscle Dispute Pending</span>
+    <span class="tag">Stream Unknown</span>
+    <span class="tag">Not The App</span>
+    <span class="tag">Peer Reviewed*</span>
+    <span class="tag">Long Read</span>
+  </div>
+
+  <div class="back-to-top-section">
+    <div class="back-to-top-inner">
+      <span class="back-to-top-label">End of Dossier · Classification Gold · Eyes Only · All Subjects Documented</span>
+      <a href="#masthead" class="back-to-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;">
+        <span>↑</span> Return To Top Of File
+      </a>
+      <span class="back-to-top-sub">The Daily Forensic · Chrysalis Division · Vol. XLII No. 107</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="dedication">
+  <p>*Peer review conducted by one (1) peer, who was present, who read it on a Tuesday, and who said "yeah, this seems right" before immediately sending it to the affiliate network.</p>
+</div>
+
+<div class="paper-footer">
+  © 2026 The Daily Forensic · All Subjects Documented Without Permission · Nayana Baiju Is Not An Edtech Platform · The Muscles Remain Disputed · The Dora Comparison Was Not Our Idea · The Stream Is Still Unknown · The Edits Continue · Vol. XLII · No. 107
+</div>
+
+<script>
+const gold = '#c8a84b', dark = '#0d0d0d', cream = '#f5f0e8', mid = '#888';
+Chart.defaults.font.family = "'Oswald', sans-serif";
+Chart.defaults.color = '#444';
+
+// Fig A: Slytherin Radar
+new Chart(document.getElementById('slytherinRadar'), {
+  type: 'radar',
+  data: {
+    labels: ['House Pride', 'Draco Devotion', 'Edit Output', 'Black Outfits', 'Affiliate Loyalty', 'Flex Confidence', 'Lowkey-ness'],
+    datasets: [
+      {
+        label: 'Nayana Baiju',
+        data: [100, 97, 99, 96, 95, 88, 14],
+        borderColor: dark, backgroundColor: 'rgba(26,26,26,0.08)', borderWidth: 2,
+        pointBackgroundColor: dark, pointRadius: 4,
+      },
+      {
+        label: 'Average 11th Grader',
+        data: [20, 15, 12, 40, 50, 38, 72],
+        borderColor: gold, backgroundColor: 'rgba(200,168,75,0.1)', borderWidth: 2,
+        pointBackgroundColor: gold, pointRadius: 4,
+      }
+    ]
+  },
+  options: {
+    plugins: { legend: { position: 'bottom', labels: { font: { size: 9 }, boxWidth: 11 } } },
+    scales: { r: { ticks: { display: false }, grid: { color: '#ddd' }, pointLabels: { font: { size: 9 } }, min: 0, max: 100 } }
+  }
+});
+
+// Fig B: Dora chart
+new Chart(document.getElementById('doraChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Navigational Confidence', 'Direct Communication', 'Adventure Energy', 'Self-Sufficiency', 'Compact Backpack', 'Rhetorical Questions'],
+    datasets: [
+      { label: 'Dora the Explorer', data: [98, 99, 100, 97, 100, 99], backgroundColor: gold, borderWidth: 0 },
+      { label: 'Nayana Baiju', data: [88, 91, 85, 90, 55, 94], backgroundColor: dark, borderWidth: 0 }
+    ]
+  },
+  options: {
+    scales: {
+      y: { min: 0, max: 100, grid: { color: '#eee' }, ticks: { callback: v => v + '%' } },
+      x: { grid: { display: false }, ticks: { font: { size: 8 } } }
+    },
+    plugins: { legend: { position: 'bottom', labels: { font: { size: 9 }, boxWidth: 12 } } }
+  }
+});
+
+// Lowkey sidebar chart
+new Chart(document.getElementById('lowkeyChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Stated Lowkey-ness', 'Actual Lowkey-ness', 'Times Mentioned', 'Ambient Disclosure Rate'],
+    datasets: [{
+      data: [85, 14, 100, 78],
+      backgroundColor: [dark, gold, dark, gold],
+      borderWidth: 0,
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { grid: { color: '#eee' }, ticks: { callback: v => v + '%' }, max: 100 },
+      y: { grid: { display: false }, ticks: { font: { size: 8 } } }
+    }
+  }
+});
+
+// Fig D: Interest doughnut
+new Chart(document.getElementById('interestChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Draco Malfoy Edits', 'Being a Slytherin', 'Affiliate Operations', 'Black Wardrobe Maintenance', 'Being Lowkey (Attempting)', 'Stream Deliberation', 'Everything Else'],
+    datasets: [{
+      data: [31, 25, 15, 10, 8, 6, 5],
+      backgroundColor: [dark, gold, '#555', '#888', '#a8895a', '#ccc', '#e0d8c8'],
+      borderColor: cream,
+      borderWidth: 2,
+    }]
+  },
+  options: {
+    plugins: { legend: { position: 'bottom', labels: { font: { size: 8 }, boxWidth: 10, padding: 6 } } },
+    cutout: '55%'
+  }
+});
+
+// Fig E: Personality radar
+new Chart(document.getElementById('personalityRadar'), {
+  type: 'radar',
+  data: {
+    labels: ['Slytherin Devotion', 'Aesthetic Commitment', 'Network Selectivity', 'Identity Certainty', 'Draco Loyalty', 'Lowkey Execution', 'Flex Confidence'],
+    datasets: [
+      {
+        label: 'Nayana Baiju',
+        data: [99, 96, 95, 98, 97, 14, 88],
+        borderColor: gold, backgroundColor: 'rgba(200,168,75,0.12)', borderWidth: 2,
+        pointBackgroundColor: dark, pointRadius: 4,
+      },
+      {
+        label: 'Average Peer',
+        data: [22, 45, 55, 50, 18, 68, 40],
+        borderColor: '#aaa', backgroundColor: 'rgba(170,170,170,0.07)', borderWidth: 1.5,
+        pointBackgroundColor: '#aaa', pointRadius: 3,
+      }
+    ]
+  },
+  options: {
+    plugins: { legend: { position: 'bottom', labels: { font: { size: 9 }, boxWidth: 11 } } },
+    scales: { r: { ticks: { display: false }, grid: { color: '#ddd' }, pointLabels: { font: { size: 8.5 } }, min: 0, max: 100 } }
+  }
+});
+
+// Fig F: Coherence chart
+new Chart(document.getElementById('coherenceChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Slytherin Identity', 'Draco Edit Pipeline', 'Affiliate Network', 'Black Aesthetic', 'Lesbian Identity', 'Dora Resemblance', 'Muscle Situation', 'Stream Status'],
+    datasets: [{
+      label: 'Data Confidence (%)',
+      data: [100, 99, 98, 96, 95, 74, 42, 0],
+      backgroundColor: [dark, dark, dark, dark, gold, gold, gold, '#ccc'],
+      borderWidth: 0,
+    }]
+  },
+  options: {
+    scales: {
+      y: { min: 0, max: 100, grid: { color: '#eee' }, ticks: { callback: v => v + '%' } },
+      x: { grid: { display: false }, ticks: { font: { size: 8.5 } } }
+    },
+    plugins: { legend: { display: false } }
+  }
+});
+
+// Animate trait bars
+const barData = [
+  {id:'b1', w:'100%'}, {id:'b2', w:'94%'}, {id:'b3', w:'99%'},
+  {id:'b4', w:'88%'}, {id:'b5', w:'96%'}, {id:'b6', w:'14%'}, {id:'b7', w:'42%'}
+];
+const bObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      barData.forEach((b, i) => {
+        const el = document.getElementById(b.id);
+        if (el) setTimeout(() => { el.style.width = b.w; }, i * 100 + 200);
+      });
+      bObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.3 });
+const firstBar = document.getElementById('b1');
+if (firstBar) bObs.observe(firstBar.closest('.sidebar-box'));
+
+// Progress bar + masthead
+const progressBar = document.getElementById('progress-bar');
+const mh = document.getElementById('masthead');
+window.addEventListener('scroll', () => {
+  const h = document.body.scrollHeight - window.innerHeight;
+  progressBar.style.width = (window.scrollY / h * 100) + '%';
+  mh.classList.toggle('compact', window.scrollY > 80);
+});
+</script>
+</body>
+</html>
